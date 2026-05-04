@@ -85,6 +85,9 @@
     .hero-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(8,11,18,.75) 100%);pointer-events:none}
     .hero-badge{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:.9rem 1.4rem;background:var(--violet);font-family:var(--ff-m);font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-align:center}
     .hero-stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);flex-shrink:0}
+
+    /* Circular photo — shown only on mobile */
+    .hero-photo-circle{display:none}
     .hero-stat{padding:1.1rem 1.3rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
     .hero-stat:nth-child(2n){border-right:none}
     .hero-stat:nth-child(3),.hero-stat:nth-child(4){border-bottom:none}
@@ -184,10 +187,37 @@
       nav{padding:1rem 1.5rem}
       .nav-links{display:none}
       .hamburger{display:flex}
-      #home{grid-template-columns:1fr;padding-top:62px}
-      .hero-left{padding:3rem 1.5rem 2rem;border-right:none;border-bottom:1px solid var(--border)}
-      .hero-right{flex-direction:row;flex-wrap:wrap}
-      .hero-photo-wrap{width:100%;height:320px;flex:none}
+      #home{grid-template-columns:1fr;padding-top:62px;display:flex;flex-direction:column}
+      .hero-right{order:-1;flex-direction:column}
+
+      /* Hide the rectangular photo; show circular photo */
+      .hero-photo-wrap{display:none}
+      .hero-badge{display:none}
+      .hero-photo-circle{
+        display:flex;justify-content:center;align-items:center;
+        padding:2.5rem 1.5rem 1.5rem;
+        background:transparent;
+      }
+      .hero-photo-circle img{
+        width:180px;height:180px;
+        border-radius:50%;
+        object-fit:cover;object-position:center 15%;
+        border:3px solid var(--violet);
+        box-shadow:0 0 0 6px rgba(124,92,252,.18),0 0 40px rgba(124,92,252,.35);
+        filter:grayscale(10%) contrast(1.08);
+        transition:filter .5s,box-shadow .5s;
+      }
+      .hero-photo-circle img:hover{
+        filter:grayscale(0%) contrast(1);
+        box-shadow:0 0 0 8px rgba(34,211,238,.2),0 0 60px rgba(124,92,252,.5);
+      }
+
+      .hero-left{padding:0 1.5rem 2rem;border-right:none;border-bottom:1px solid var(--border);text-align:center}
+      .hero-tag{margin-left:auto;margin-right:auto}
+      .hero-role{justify-content:center}
+      .hero-role::before{display:none}
+      .hero-desc{margin-left:auto;margin-right:auto}
+      .hero-btns{justify-content:center}
       .hero-stats{width:100%}
       .sec-wrap{padding:5rem 1.5rem}
       .about-grid{grid-template-columns:1fr;gap:2.5rem}
@@ -215,7 +245,9 @@
 
       /* Hero */
       #home{padding-top:56px}
-      .hero-left{padding:2rem 1rem 1.8rem;min-width:0;overflow:hidden}
+      .hero-photo-circle{padding:2rem 1rem 1.2rem}
+      .hero-photo-circle img{width:148px;height:148px}
+      .hero-left{padding:0 1rem 1.8rem;min-width:0;overflow:hidden}
       .hero-tag{font-size:.54rem;letter-spacing:.1em;padding:.22rem .62rem;margin-bottom:1.4rem}
       .hero-greeting{font-size:.66rem;margin-bottom:.5rem}
 
@@ -236,9 +268,7 @@
       .hero-btns{flex-direction:column;gap:.6rem}
       .btn-v,.btn-o{width:100%;padding:.7rem 1rem;font-size:.64rem;justify-content:center}
 
-      /* Hero photo */
-      .hero-photo-wrap{height:240px}
-      .hero-badge{font-size:.53rem;padding:.65rem .9rem;letter-spacing:.11em}
+      /* Hero photo hidden on mobile — circular used instead */
 
       /* Stats */
       .hero-stat{padding:.85rem .9rem}
@@ -359,13 +389,18 @@
   </div>
 
   <div class="hero-right">
+    <!-- Circular photo: visible only on mobile/tablet -->
+    <div class="hero-photo-circle">
+      <img src="assests/abbos.jpg" alt="Abbos Qo'chqorboyev"/>
+    </div>
+    <!-- Rectangular photo: visible only on desktop -->
     <div class="hero-photo-wrap">
       <img src="assests/abbos.jpg" alt="Abbos Qo'chqorboyev"/>
       <div class="hero-badge">Full Stack Developer</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="stat-num">2+</div><div class="stat-lbl" data-key="s1">Yil ta'lim</div></div>
-      <div class="hero-stat"><div class="stat-num">4</div><div class="stat-lbl" data-key="s2">Loyihalar</div></div>
+      <div class="hero-stat"><div class="stat-num">3</div><div class="stat-lbl" data-key="s2">Loyihalar</div></div>
       <div class="hero-stat"><div class="stat-num">20+</div><div class="stat-lbl" data-key="s3">Texnologiya</div></div>
       <div class="hero-stat"><div class="stat-num">3</div><div class="stat-lbl" data-key="s4">Tillar</div></div>
     </div>
